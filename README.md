@@ -8,3 +8,5 @@ my main concern was that we are doing a lot of extra things around meta-transact
 
 Those tests end up being a bit more integrative - there's a lot of value in a more e2e test that covers our SDK and forwarding contract and context primitives in an implementation contract. But I'd heard good things about Foundry and wanted to give it a shot.
 
+My main takeaway is speed - much faster than hardhat. I think I'd have been more happy using Forge while developing our contracts SDK as well - copying source into `lib` makes it a lot easier to make tiny changes to the SDK contracts compared to using an NPM package.
+
