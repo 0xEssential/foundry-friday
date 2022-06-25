@@ -18,9 +18,6 @@ contract AnOnchainGameTest is Test {
     SigUtils internal sigUtils;
     AnOnchainGame internal gameContract;
 
-    uint256 internal deployerPrivateKey;
-    address internal deployer;
-
     uint256 internal playerPrivateKey;
     address internal player;
 
@@ -33,9 +30,6 @@ contract AnOnchainGameTest is Test {
         forwarder = new EssentialForwarder("EssentialForwarder", urls);
         sigUtils = new SigUtils(forwarder._domainSeparatorV4());
         gameContract = new AnOnchainGame(address(forwarder));
-
-        deployerPrivateKey = 0xA11CE;
-        deployer = vm.addr(deployerPrivateKey);
 
         playerPrivateKey = 0xC11CE;
         player = vm.addr(playerPrivateKey);
