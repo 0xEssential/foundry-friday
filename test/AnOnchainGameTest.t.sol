@@ -40,6 +40,8 @@ contract AnOnchainGameTest is Test {
         ownershipSigner = vm.addr(ownershipSignerPrivateKey);
 
         forwarder.setOwnershipSigner(ownershipSigner);
+
+        setMap();
     }
 
     // helper for building request struct
@@ -233,7 +235,6 @@ contract AnOnchainGameTest is Test {
     }
 
     function testSetMap() public {
-        setMap();
         uint16 oneToTwo = gameContract.adjacentSpaces(1, 0);
         assertEq(oneToTwo, 2);
 
@@ -248,7 +249,6 @@ contract AnOnchainGameTest is Test {
     }
 
     function testTrustedMove() public {
-        setMap();
         register();
 
         metaTx(abi.encodeWithSignature("performMove(uint16)", uint16(2)));
