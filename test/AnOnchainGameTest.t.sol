@@ -19,14 +19,18 @@ contract AnOnchainGameTest is Test {
 
     uint256 internal playerPrivateKey;
     address internal player;
-    uint256 internal nonce;
+    uint256 internal playerNonce;
+
+    uint256 internal player2PrivateKey;
+    address internal player2;
+    uint256 internal player2Nonce;
 
     uint256 internal ownershipSignerPrivateKey;
     address internal ownershipSigner;
     string[] internal urls;
 
     AnOnchainGame.Space[] internal spaces;
-    uint16[] adjacentSpaces;
+    uint16[] internal adjacentSpaces;
 
     function setUp() public {
         forwarder = new EssentialForwarder("EssentialForwarder", urls);
@@ -51,7 +55,7 @@ contract AnOnchainGameTest is Test {
             from: player,
             authorizer: player,
             nftContract: player,
-            nonce: nonce,
+            nonce: playerNonce,
             nftChainId: block.chainid,
             nftTokenId: 1,
             targetChainId: block.chainid,
@@ -60,7 +64,7 @@ contract AnOnchainGameTest is Test {
             data: selector
         });
 
-        nonce += 1;
+        playerNonce += 1;
     }
 
     // helper for signing request struct
@@ -258,5 +262,9 @@ contract AnOnchainGameTest is Test {
 
         uint256 lastMove = gameContract.playerLastMove(player);
         assertEq(lastMove, block.timestamp);
+
+        uint8 playerTeam = gameContract.playerTeam(player);
+        uint8 spaceControllerTeam = gameContract.controlledSpaces(2);
+        assertEq(spaceControllerTeam, playerTeam);
     }
 }
